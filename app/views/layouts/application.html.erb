@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Igallery</title>
+    <title>IGallery</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,25 @@
   </head>
 
   <body>
+    <nav class="navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <%= link_to "IGallery", root_path, class:"navbar-brand" %>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Page</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to " Sign Up", new_user_registration_path, class:"glyphicon glyphicon-user" %>
+        </li>
+          <li>
+          <%= link_to " Login", new_user_session_path, class: "glyphicon glyphicon-log-in" %>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
