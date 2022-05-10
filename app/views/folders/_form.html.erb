@@ -1,21 +1,5 @@
 <%= form_with(model: folder) do |form| %>
-  <% if folder.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
-
-      <ul>
-        <% folder.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-
-  <div>
-    <%= form.label :user_id %><br>
-    <%= form.text_field :user_id %>
-  </div>
+<%= render "shared/errors", form: form %>
 
   <div>
     <%= form.label :title %><br>

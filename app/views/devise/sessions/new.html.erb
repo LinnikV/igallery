@@ -1,6 +1,6 @@
 <div class="container">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { data: { turbo: false} } ) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
   <form class="form-horizontal"  action="/action_page.php">
 
     <div class="form-group">
@@ -29,6 +29,13 @@
         </div>
       </div>
     </div>
+
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+          <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+      </div>
+    </div>
+    
     
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
@@ -38,3 +45,7 @@
   <% end %>
   </form>
 </div>
+
+
+
+

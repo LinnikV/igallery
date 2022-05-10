@@ -21,7 +21,7 @@ class FoldersController < ApplicationController
 
   # POST /folders or /folders.json
   def create
-    @folder = Folder.new(folder_params)
+    @folder = current_user.folders.new(folder_params)
 
     respond_to do |format|
       if @folder.save
