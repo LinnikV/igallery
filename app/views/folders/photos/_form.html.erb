@@ -1,4 +1,4 @@
-<%= form_with(model: photo) do |form| %>
+<%= form_with(model: [@folder, photo]) do |form| %>
   <% if photo.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
@@ -14,16 +14,6 @@
   <div>
     <%= form.label :img, style: "display: block" %>
     <%= form.text_field :img %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :folder_id, style: "display: block" %>
-    <%= form.text_field :folder_id %>
   </div>
 
   <div>

@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :folders
-  has_many :photos
+  has_many :folders 
+  has_many :photos, through: :folders
+
+  
 end
