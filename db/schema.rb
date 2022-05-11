@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_10_111327) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_11_082514) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_10_111327) do
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_folders_on_title", unique: true
     t.index ["user_id"], name: "index_folders_on_user_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "img", null: false
+    t.bigint "user_id", null: false
+    t.bigint "folder_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["folder_id"], name: "index_photos_on_folder_id"
+    t.index ["user_id"], name: "index_photos_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,4 +46,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_10_111327) do
   end
 
   add_foreign_key "folders", "users"
+  add_foreign_key "photos", "folders"
+  add_foreign_key "photos", "users"
 end
