@@ -1,7 +1,9 @@
 <div id="<%= dom_id photo %>">
   <p>
-    <strong>Img:</strong>
-    <%= photo.img %>
+  
+    <% photo.imgs.each do |img|%>
+    <%= image_tag (img.url) %>
+    <% end %>
   </p>
 
   <p>
@@ -14,4 +16,4 @@
     <%= photo.folder.title%>
   </p>
 
-</div>
+</div><hr>

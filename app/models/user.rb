@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :folders 
   has_many :photos, through: :folders
+  has_many :imgs
 
   
 end

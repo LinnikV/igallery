@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_11_082514) do
   end
 
   create_table "photos", force: :cascade do |t|
-    t.string "img", null: false
+    t.string "imgs"
     t.bigint "user_id", null: false
     t.bigint "folder_id", null: false
     t.datetime "created_at", null: false

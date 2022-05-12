@@ -26,6 +26,6 @@ class Folders::PhotosController < ApplicationController
     end
 
     def photo_params
-      params.require(:photo).permit(:img).merge(user: current_user)
+      params.require(:photo).permit( {imgs: []} ).merge(user: current_user)
     end
 end
