@@ -13,11 +13,11 @@
 
   <div>
 
-    <% photo.imgs.each do |img| %>
+    <% photo.images.each do |img| %>
       <%= hidden_field :photo, :imgs, multiple: true %>
     <% end %>
-    <%= form.label :imgs, style: "display: block" %>
-    <%= form.file_field :imgs, multiple: true  %>
+    <%= form.label :images, style: "display: block" %>
+    <%= form.file_field :images, multiple: true  %>
   </div>
 
   <div>

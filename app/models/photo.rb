@@ -1,7 +1,6 @@
 class Photo < ApplicationRecord
-  mount_uploaders :imgs, ImgsUploader
-  serialize :imgs
+  mount_uploaders :images, ImageUploader
   belongs_to :user
   belongs_to :folder
-  has_many :imgs
+ 
 end
