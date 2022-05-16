@@ -16,6 +16,8 @@ gem 'bootstrap-sass', '~> 3.4.1'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'devise'
 gem 'carrierwave', '~> 2.0'
+gem "mini_magick"
+gem 'protected_attributes_continued'
 
 group :development, :test do
   gem 'rspec-rails'
