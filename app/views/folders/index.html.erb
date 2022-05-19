@@ -1,9 +1,13 @@
 <h1>Folders</h1>
 
+<div>
+  <%= link_to "New folder", new_folder_path %>
+</div><br>
+
 <div id="folders">
   <% @folders.each do |folder| %>
     <%= render folder %><br>
   <% end %>
 </div>
 
-<%= link_to "New folder", new_folder_path %>
+

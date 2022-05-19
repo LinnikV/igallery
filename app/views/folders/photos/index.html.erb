@@ -1,0 +1,7 @@
+<h1>Photos</h1>
+
+<div id="photos">
+  <% @photos.each do |photo| %>
+    <%=  image_tag (photo.image.url) %>
+  <% end %>
+</div>

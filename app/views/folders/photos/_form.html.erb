@@ -12,12 +12,8 @@
   <% end %>
 
   <div>
-
-    <% photo.images.each do |img| %>
-      <%= hidden_field :photo, :imgs, multiple: true %>
-    <% end %>
-    <%= form.label :images, style: "display: block" %>
-    <%= form.file_field :images, multiple: true  %>
+    <%= form.label :image, style: "display: block" %>
+    <%= form.file_field :image %>
   </div>
 
   <div>

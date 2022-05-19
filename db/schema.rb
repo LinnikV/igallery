@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_15_093457) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_19_090720) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body", null: false
+    t.bigint "user_id", null: false
+    t.bigint "photo_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_id"], name: "index_comments_on_photo_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "folders", force: :cascade do |t|
     t.string "title", null: false
@@ -24,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_15_093457) do
   end
 
   create_table "photos", force: :cascade do |t|
-    t.string "images", default: [], array: true
+    t.string "image", null: false
     t.bigint "user_id", null: false
     t.bigint "folder_id", null: false
     t.datetime "created_at", null: false
@@ -46,11 +56,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_15_093457) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "photos"
+  add_foreign_key "comments", "users"
   add_foreign_key "folders", "users"
   add_foreign_key "photos", "folders"
   add_foreign_key "photos", "users"

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "photos/edit", type: :view do
   before(:each) do
     @photo = assign(:photo, Photo.create!(
-      img: "MyString",
+      image: "MyString",
       user: nil,
       folder: nil
     ))
@@ -14,7 +14,7 @@ RSpec.describe "photos/edit", type: :view do
 
     assert_select "form[action=?][method=?]", photo_path(@photo), "post" do
 
-      assert_select "input[name=?]", "photo[img]"
+      assert_select "input[name=?]", "photo[image]"
 
       assert_select "input[name=?]", "photo[user_id]"
 

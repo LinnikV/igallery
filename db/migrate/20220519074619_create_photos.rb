@@ -1,7 +1,7 @@
 class CreatePhotos < ActiveRecord::Migration[7.0]
   def change
     create_table :photos do |t|
-      t.string :images, array: true, default: []
+      t.string :image, null: false
       t.references :user, null: false, foreign_key: true
       t.references :folder, null: false, foreign_key: true
 

@@ -1,0 +1,12 @@
+<%= render @photo %>
+
+<div>
+  <%= link_to "Edit this photo", edit_folder_photo_path(@folder, @photo) %> |
+    <%= link_to "Comments", new_folder_photo_comment_path(@folder, @photo) %>
+
+
+  <%= button_to "Destroy this photo", folder_photo_path(@folder, @photo), method: :delete %>
+</div>
+
+
+<%= render partial: "folders/photos/comments/comment", collection: @photo.comments %>
