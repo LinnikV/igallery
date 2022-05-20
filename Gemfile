@@ -18,6 +18,8 @@ gem 'devise'
 gem 'carrierwave', '~> 2.0'
 gem "mini_magick"
 gem 'protected_attributes_continued'
+gem 'acts_as_votable'
+gem 'rubocop', require: false
 
 group :development, :test do
   gem 'rspec-rails'

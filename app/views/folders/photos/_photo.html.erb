@@ -5,6 +5,11 @@
   </p>
 
   <p>
+   <%= button_to "Like", [:upvote, @folder, photo], method: :patch, data: {turbo: "false"} %>
+   <%= photo.cached_votes_total %>
+  </p>
+
+  <p>
     <strong>User:</strong>
     <%= photo.user.email %>
   </p>
