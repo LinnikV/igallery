@@ -11,10 +11,6 @@ module Folders
         @comments = Comment.all
       end
 
-      def new
-        @comment = @photo.comments.new
-      end
-
       def edit; end
 
       def create
@@ -22,8 +18,14 @@ module Folders
 
         respond_to do |format|
           if @comment.save
+            format.turbo_stream do render turbo_stream: [
+              turbo_stream.update('new_photo', partial: 'folders/photos/form', locals: {photo: Photo.new}),
+              turbo_stream.prepend('comment_list', partial: 'folders/photos/comments/comment', locals: {comment: @comment})]
+          end
             format.html { redirect_to folder_photo_path(@folder, @photo), notice: 'Comment was successfully created.' }
           else
+            format.turbo_stream do render turbo_stream: turbo_stream.update('new_photo', partial: 'folders/photos/form', locals: {photo: Photo.new})
+          end
             format.html { render :new, status: :unprocessable_entity }
           end
         end
@@ -43,6 +45,8 @@ module Folders
         @comment.destroy
 
         respond_to do |format|
+          format.turbo_stream do render turbo_stream:[turbo_stream.remove(@comment)]
+          end
           format.html { redirect_to folder_photo_path(@folder, @photo), notice: 'Comment was successfully destroyed.' }
         end
       end

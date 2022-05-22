@@ -1,7 +1,7 @@
 <div id="<%= dom_id photo %>">
   <p>
     <strong>Image:</strong><br>
-    <%= link_to image_tag(photo.image.url), folder_photo_path(@folder, photo) %>
+    <%= link_to image_tag(photo.image.url(:large)), folder_photo_path(@folder, photo) %>
   </p>
 
   <p>

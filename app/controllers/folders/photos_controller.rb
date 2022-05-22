@@ -9,7 +9,7 @@ module Folders
     def upvote
       @photo = @folder.photos.find(params[:id])
       @photo.upvote! current_user
-      redirect_to @folder
+      redirect_to request.referrer
     end
 
     def index
@@ -18,10 +18,6 @@ module Folders
 
     def show; end
 
-    def new
-      @photo = @folder.photos.new
-    end
-
     def edit; end
 
     def create
@@ -29,8 +25,15 @@ module Folders
 
       respond_to do |format|
         if @photo.save
+          format.turbo_stream do render turbo_stream: [
+            turbo_stream.update('new_folder', partial: 'folders/form', locals: {folder: Folder.new}),
+            turbo_stream.prepend('photo_list', partial: 'folders/photos/photo', locals: {photo: @photo})]
+
+        end
           format.html { redirect_to @folder, notice: 'Photo was successfully created.' }
         else
+          format.turbo_stream do render turbo_stream: turbo_stream.update('new_folder', partial: 'folders/form', locals: {folder: Folder.new})
+        end
           format.html { render :new, status: :unprocessable_entity }
         end
       end
