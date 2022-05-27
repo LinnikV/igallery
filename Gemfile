@@ -20,6 +20,7 @@ gem "mini_magick"
 gem 'protected_attributes_continued'
 gem 'acts_as_votable'
 gem 'rubocop', require: false
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'rspec-rails'

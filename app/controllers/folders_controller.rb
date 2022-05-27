@@ -7,6 +7,11 @@ class FoldersController < ApplicationController
     @folders = Folder.all
   end
 
+  def new
+    @folder = Folder.new
+    
+  end
+
   def show; end
 
   def edit; end
@@ -16,16 +21,9 @@ class FoldersController < ApplicationController
 
     respond_to do |format|
       if @folder.save
-        format.turbo_stream do render turbo_stream: [
-          turbo_stream.update('new_photo', partial: 'folders/photos/form', locals: {photo: Photo.new}),
-          turbo_stream.prepend('folders', partial: 'folders/folder', locals: {folder: @folder})
-
-        ]
-      end
-        format.html { redirect_to folder_url(@folder), notice: 'Folder was successfully created.' }
+        format.html { redirect_to folder_url(@folder), notice: "Folder was successfully created." }
       else
-        format.turbo_stream do render turbo_stream: turbo_stream.update('new_photo', partial: 'folders/photos/form', locals: {photo: Photo.new})
-      end
+        render_turbo_stream_error
         format.html { render :new, status: :unprocessable_entity }
       end
     end
@@ -51,11 +49,16 @@ class FoldersController < ApplicationController
 
   private
 
+  def render_turbo_stream_error
+    flash.now[:alert] = @folder.errors.full_messages.join('; ')
+  end
+
   def set_folder
     @folder = Folder.find(params[:id])
   end
 
   def folder_params
-    params.require(:folder).permit(:title, :user_id)
+    params.permit(:title, :user_id)
   end
 end
+

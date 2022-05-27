@@ -1,15 +1,15 @@
 <h1>Folders</h1>
+<%= turbo_stream_from "folders" %>
 
+<%= link_to "#", class:"btn btn-danger", data: { toggle: "modal", target: "#Modal" } do %>
+  New Folder
+<% end %>
+<%= render "form", folder: @folder, locals: { folder: Folder.new } %>
 
-
-<div id="new_folder">
-  <%= render 'folders/form', folder: Folder.new %>
-</div><br>
 
 <div id="folders">
   <% @folders.each do |folder| %>
     <%= link_to "#{folder.title}", folder %><br>
   <% end %>
 </div>
-
 

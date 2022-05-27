@@ -1,10 +1,10 @@
 <%= @folder.title %>
 
-
 <div>
   <%= link_to "Edit this folder", edit_folder_path(@folder) %> |
   <%= button_to "Destroy this folder", @folder, method: :delete %>
 </div>
+
 
 <div id='new_photo'>
   <%= render 'folders/photos/form', photo: Photo.new %>

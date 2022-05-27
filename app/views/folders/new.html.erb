@@ -1,0 +1,5 @@
+<%= turbo_stream_from "folders" %>
+
+<%= render "folders/form", folder: @folder, locals: { folder: Folder.new } %>
+
+<%= link_to "Back", folders_path %>

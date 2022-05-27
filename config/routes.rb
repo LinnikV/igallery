@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
   
   root 'static_page#home'
-  devise_for :users
+
   get 'images', action: :index, controller: 'folders/photos'
   get 'comments', action: :index, controller: 'folders/photos/comments'
+  
+  devise_for :users do
+    member do
+      get :following, :followers
+    end
+  end
   
 
   resources :folders do
