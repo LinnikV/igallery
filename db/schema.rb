@@ -10,33 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_20_085327) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_29_141953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "categories", force: :cascade do |t|
+    t.string "title", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_categories_on_title", unique: true
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "body", null: false
-    t.bigint "user_id", null: false
     t.bigint "photo_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["photo_id"], name: "index_comments_on_photo_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "folders", force: :cascade do |t|
-    t.string "title", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["title"], name: "index_folders_on_title", unique: true
-    t.index ["user_id"], name: "index_folders_on_user_id"
-  end
-
   create_table "photos", force: :cascade do |t|
     t.string "image", null: false
+    t.bigint "category_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "folder_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "cached_votes_total", default: 0
@@ -46,8 +46,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_085327) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
-    t.index ["folder_id"], name: "index_photos_on_folder_id"
+    t.index ["category_id"], name: "index_photos_on_category_id"
     t.index ["user_id"], name: "index_photos_on_user_id"
+  end
+
+  create_table "subscribes", force: :cascade do |t|
+    t.string "user_id"
+    t.string "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_subscribes_on_category_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,9 +91,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_085327) do
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter"
   end
 
+  add_foreign_key "categories", "users"
   add_foreign_key "comments", "photos"
   add_foreign_key "comments", "users"
-  add_foreign_key "folders", "users"
-  add_foreign_key "photos", "folders"
+  add_foreign_key "photos", "categories"
   add_foreign_key "photos", "users"
 end

@@ -1,0 +1,18 @@
+<div id="<%= dom_id comment %>">
+
+ <p>
+    <strong>User:</strong>
+    <%= comment.user.email %>
+  </p>
+  
+  <p>
+    <strong>Comment:</strong>
+    <%=  simple_format(comment.body) %>
+  </p>
+
+  <p>
+    <%= link_to "Edit", edit_category_photo_comment_path(@category, @photo, comment) %>
+    <%= button_to "Destroy", category_photo_comment_path(@category, @photo, comment), method: :delete %>
+  </p>
+<hr>
+</div>

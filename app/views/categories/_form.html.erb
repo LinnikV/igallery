@@ -1,0 +1,13 @@
+<%= turbo_frame_tag category do %>
+  <%= form_with(model: category) do |form| %>
+    <div class="field">
+      <%= form.label :title %><br>
+      <%= form.text_field :title %>
+    </div>
+    
+    <%= form.submit class: "btn btn-sm btn-success" %>
+    <%= link_to "Cancel", category, class: "btn btn-sm btn-danger" %>
+  <% end %>
+<% end %>
+
+

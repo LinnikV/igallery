@@ -1,2 +1,13 @@
-<h1>StaticPage#home</h1>
-<p>Find me in app/views/static_page/home.html.erb</p>
+<div>
+    <% if signed_in? %>
+        <h2>Feeds</h2>
+        <% current_user.subscribes.each do |subscribe| %>
+            <%= render partial: "categories/photos/photo", collection: subscribe.category.photos %>
+        <% end %>
+    <% else %>
+        <h1>Welcome to the IGallary!</h1>
+        <% @photos.each do |photo| %>
+             <%=  image_tag (photo.image.url) %>
+        <% end %>
+    <% end %>
+</div>
