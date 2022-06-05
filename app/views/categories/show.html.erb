@@ -1,16 +1,18 @@
-<%= @category.title %>
+<h3>
+<%= @category.title.capitalize %>
+</h3>
 
 <div>
-  <%= link_to "Edit ", edit_category_path(@category) %> |
-  <%= button_to "Destroy ", @category, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } %>
-
-  <% if @category.subscribes.present? %>
-    <%= button_to "Unsubscribe", [:unsubscribe, @category], method: :delete, data: {turbo: "false"} %>
-  <% else %>
-    <%= button_to "Subscribe", [:subscribe, @category], method: :patch, data: {turbo: "false"} %>
-  <% end %>
-
   <%= render 'categories/photos/form', photo: Photo.new %>
 
-  <%= render partial: "categories/photos/photo", collection: @category.photos %>
+  <div class="row row-cols-3">
+    <% @category.photos.each do |photo| %>
+      <div class="col">
+        <%= render partial: "categories/photos/photo", locals: {photo: photo } %>
+      </div>
+    <% end %>
+  </div> 
+</div>
 
+
+  <%#= render partial: "categories/photos/photo", collection: @category.photos %>

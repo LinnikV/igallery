@@ -1,7 +1,12 @@
-<h1>Photos</h1>
-
 <div id="photos">
-  <% @photos.each do |photo| %>
-    <%=  image_tag (photo.image.url) %>
-  <% end %>
+  <div class="row row-cols-3">
+    <% @photos.each do |photo| %>
+      <div class="col">
+        <%=  image_tag (photo.image.url(:large)) %>
+      </div>
+    <% end %>
+  </div>
 </div>
+
+
+

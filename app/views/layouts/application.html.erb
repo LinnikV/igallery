@@ -11,51 +11,61 @@
   </head>
 
   <body>
-  
-    <nav class="navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg fixed-top">
       <div class="container-fluid">
-        <div class="navbar-header">
-          <%= link_to "IGallery", root_path, class:"navbar-brand" %>
+      <%= link_to "IGallery", root_path, class:"navbar-brand" %>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <div class="btn-group">
+              <%= link_to "Categories", categories_path, class:"nav-link" %>
+              <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+              <%#= link_to "New", new_category_path, class:"btn btn-primary ", data: { turbo_frame: dom_id(Category.new) }, class:"dropdown-item" %>
+              <%= link_to "New Category", new_category_path, class:"dropdown-item", data: { bs_toggle: "modal", bs_target: "#lol" } %>
+
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
+            <li class="nav-item">
+            <li> <%= link_to "Imeges", images_path, class:"nav-link active" %></li>
+            </li>
+            <li class="nav-item">
+            <li> <%= link_to "Comments", comments_path(@comments), class:"nav-link active" %></li>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <% if signed_in? %>
+              <li>
+                <%= link_to current_user.email, edit_user_registration_path, class:"btn btn-link " %>
+              </li>
+              <li>
+                <%= link_to " Log out", destroy_user_session_path, data: { "turbo_method": :delete, turbo_confirm: "Are you sure?" } , class: "btn btn-outline-danger" %>
+              </li>
+              <% else %>
+              <li>
+                <%= link_to " Log in", new_user_session_path, class: "btn btn-outline-success" %>
+              </li>
+              <li>
+                <%= link_to " Register", new_user_registration_path, class:"btn btn-outline-success" %>
+              </li>
+              <% end %>
+          </form>
         </div>
-        <ul class="nav navbar-nav">
-          <li> <%= link_to "Categories", categories_path, class:"active" %></li>
-          <li> <%= link_to "Imeges", images_path, class:"active" %></li>
-          <li> <%= link_to "Comments", comments_path(@comments), class:"active" %></li>
-        </ul>
-        
-        <ul class="nav navbar-nav navbar-right">
-          <% if signed_in? %>
-          <li>
-            <%= link_to current_user.email, edit_user_registration_path, class:"glyphicon glyphicon-user" %>
-          </li>
-          <li>
-            <%= link_to " Log out", destroy_user_session_path, data: { "turbo_method": :delete }, class: "glyphicon glyphicon-log-in" %>
-          </li>
-          <% else %>
-          <li>
-            <%= link_to " Log in", new_user_session_path, class: "glyphicon glyphicon-log-in" %>
-          </li>
-          <li>
-            <%= link_to " Register", new_user_registration_path, class:"glyphicon glyphicon-user" %>
-          </li>
-          <% end %>
-        </ul>
       </div>
     </nav>
-      <br>
-      <br>
-      <br>
-      <div class="container-fluid">
-     <%= render "/shared/flash" %>
-    <%= yield %>
+    <br>
+    <hr>
+    <div class="container-fluid">
+      <div id="flash">
+       <%= render "shared/flash" %>
+       </div>
+      <%= render "categories/modal", category: Category.new %>
+      <%= yield %>
     </div>
   </body>
 </html>
-
-
-  
-    
-  
-    
-    
-  

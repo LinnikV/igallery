@@ -1,17 +1,26 @@
-<h1>Comments</h1>
+<h3>Comments</h3>
 
-<div id="comments">
-  <% @comments.each do |comment| %>
-  <p>
-    <strong>User:</strong>
-    <%= comment.user.email %>
-  </p>
-  
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
-  </p><hr>
 
-  <% end %>
-</div>
+<% @comments.each do |comment| %>
+  <div class="card">
+    <p>
+      <strong>Сreated by:</strong>
+      <%= comment.user.email %>
+    </p>
 
+    <p>
+      <strong>Comment:</strong>
+      <%= comment.body %>
+    </p>
+    
+    <p>
+      <strong>Category:</strong>
+      <%= comment.photo.category.title %>
+    </p>
+
+    <p>
+      <strong>Data:</strong>
+      <%= comment.created_at.strftime("%H:%M  %d.%b.%Y")%><br>
+    </p>
+  </div>
+<% end %>

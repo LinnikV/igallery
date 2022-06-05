@@ -1,7 +1,22 @@
 <div id="<%= dom_id category %>">
 
-<%#= image_tag(@folder.photo.image.url(:thumb)) %>
-<%#= link_to "#{category.title}", category %>
+  <p>
+    <%= link_to "#{category.title.capitalize }", category %><br>
+    Сreated by:
+    <%= category.user.email %><br>
+    Date:
+    <%= category.created_at.strftime("%d.%b.%Y")%><br>
+    Time:
+    <%= category.created_at.strftime("%H:%M")%>
+  </p>
 
-
+  <span>
+    <%= button_to "Destroy ", category, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class:"btn btn-danger" %>
+    <%= link_to "Edit ", edit_category_path(category), class:"btn btn-secondary" %>
+    <% if category.subscribes.present? %>
+      <%= button_to "Unsubscribe", [:unsubscribe, category], method: :delete, data: {turbo: "false"}, class:"btn btn-danger" %>
+    <% else %>
+      <%= button_to "Subscribe", [:subscribe, category], method: :patch, data: {turbo: "false"}, class:"btn btn-success" %>
+    <% end %>
+  </span>
 </div>

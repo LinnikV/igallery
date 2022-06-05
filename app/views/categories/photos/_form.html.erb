@@ -1,12 +1,9 @@
 <%= form_with(model: [@category, photo]) do |form| %>
  <%= render 'shared/errors', form: form %>
 
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.file_field :image %>
-  </div>
-
-  <div>
+  <div class="mb-3">
+  <h5>Add image:</h5>
+    <%= form.file_field :image, class:"form-control form-control-sm" %>
     <%= form.submit %>
   </div>
 <% end %>

@@ -19,10 +19,22 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-    
-        format.html { redirect_to category_url(@category), notice: "Category was successfully created." }
+        flash.now[:notice] = "Category was successfully created."
+        format.turbo_stream do 
+          render turbo_stream: [
+            #turbo_stream.prepend("new_category", partial: "categories/category",locals: { category: @category}),
+            turbo_stream.prepend("flash", partial: "shared/flash") ]
+        end
+        format.html { redirect_to category_url, notice: "Category was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        render_turbo_stream_error
+        format.turbo_stream do
+          render turbo_stream: [
+            #turbo_stream.update(@category, partial: "categories/_new",locals: { category:  @category}) 
+            turbo_stream.prepend("flash", partial: "shared/flash")
+          ]
+        end
+        #format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -41,6 +53,7 @@ class CategoriesController < ApplicationController
     @category.destroy
 
     respond_to do |format|
+     
       format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
     end
   end
@@ -84,3 +97,6 @@ class CategoriesController < ApplicationController
     params.require(:category).permit(:title, :user_id)
   end
 end
+
+
+
