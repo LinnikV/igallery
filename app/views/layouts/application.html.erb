@@ -62,12 +62,11 @@
     <hr>
     <div class="container-fluid">
       <div id="flash">
-       <%= render "shared/flash" %>
-       </div>
-       <div id="new_category">
+        <%= render "shared/flash" %>
+      </div>
+      <div id="new_category">
         <%= render "categories/modal", category: Category.new %>
       </div>
-      <%= Time.now%>
       <%= yield %>
     </div>
   </body>

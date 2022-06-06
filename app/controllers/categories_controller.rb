@@ -2,7 +2,9 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show subscribe unsubscribe edit update destroy ]
 
   def index
-    @categories = Category.all
+    #@categories = Category.all
+    @q = Category.ransack(params[:q])
+    @categories = @q.result(distinct: true).order(title: :asc)
   end
 
   def new

@@ -1,12 +1,11 @@
 <h3>
-<%= @category.title.capitalize %>
+  <%= @category.title.capitalize %>
 </h3>
 
 <div>
   <div id="new_photo">
     <%= render 'categories/photos/form', photo: Photo.new %>
   </div>
-  
   <div class="row row-cols-3">
     <% @category.photos.each do |photo| %>
       <div id="photo" class="col" >
@@ -15,7 +14,3 @@
     <% end %>
   </div>
 </div> 
-
-
-
-  <%#= render partial: "categories/photos/photo", collection: @category.photos %>

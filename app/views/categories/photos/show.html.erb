@@ -1,10 +1,13 @@
-<%= render @photo %>
-
+<center>
+<%= image_tag (@photo.image.url) %>
+</center>
 <div id="new_comment">
   <%= render 'categories/photos/comments/form', comment: Comment.new %>
 </div>
 <div id="comment">
   <%= render partial: "categories/photos/comments/comment", collection: @photo.comments %>
 </div>
+
+
 
 

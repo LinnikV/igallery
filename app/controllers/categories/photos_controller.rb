@@ -11,7 +11,8 @@ module Categories
     end
 
     def index
-      @photos = Photo.all
+      @q = Photo.ransack(params[:q])
+      @photos = @q.result(distinct: true).order(cached_votes_total: :desc)
     end
 
     def show; end

@@ -1,16 +1,22 @@
-<div id="<%= dom_id category %>">
+<div class="card border border-secondary shadow-0 mb-3" id="<%= dom_id category %>">
 
-  <p>
-    <%= link_to "#{category.title.capitalize }", category %><br>
+  
+  <div class="card-header">
+    <%= link_to "#{category.title.capitalize }", category %>
+  </div>
+   <div class="card-body text-dark">
     Сreated by:
     <%= category.user.email %><br>
     Date:
     <%= category.created_at.strftime("%d.%b.%Y")%><br>
     Time:
-    <%= category.created_at.strftime("%H:%M")%>
-  </p>
+    <%= category.created_at.strftime("%H:%M")%><br>
+    Photo:
+    <%= category.photos_count %>
+ </div>
+
   
-  <span>
+  <div class="card-footer">
     <%= button_to "Destroy ", category, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class:"btn btn-danger" %>
     <%= button_to "Edit ", edit_category_path(category), method: :post, class:"btn btn-secondary" %>
     <% if category.subscribes.present? %>
@@ -18,5 +24,6 @@
     <% else %>
       <%= button_to "Subscribe", [:subscribe, category], method: :patch, data: {turbo: "false"}, class:"btn btn-success" %>
     <% end %>
-  </span>
+  </div>
+
 </div>

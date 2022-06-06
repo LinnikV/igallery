@@ -6,7 +6,8 @@ module Categories
       before_action :set_category, only: %i[ new create update show edit destroy]
 
       def index
-        @comments = Comment.all
+        @q = Comment.ransack(params[:q])
+        @comments = @q.result(distinct: true).order(created_at: :desc)
       end
 
       def edit

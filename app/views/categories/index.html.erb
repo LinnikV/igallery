@@ -1,14 +1,23 @@
+<span>
+  <%= search_form_for @q do |f| %>
+  <div class="input-group">
+    <%= f.search_field :title_cont, class:"form-control rounded" %>
+    <%= f.submit class:"btn btn-outline-primary" %>
+    </div>
+  <% end %>
+  <%= sort_link(@q, :title) %>
+  <%= sort_link(@q, :created_at) %>
+  <%= sort_link(@q, :photos_count) %>
+</span>
+
 <div id="category">
   <div class="row row-cols-4">
     <% @categories.each do |category| %>
       <div class="col">
-        <div class="card">
-          <%= render category %><br>
-        </div>
+        <%= render category %><br>
       </div>
     <% end %>
   </div> 
 </div>
 
 
-  
