@@ -3,16 +3,19 @@
 </h3>
 
 <div>
-  <%= render 'categories/photos/form', photo: Photo.new %>
-
+  <div id="new_photo">
+    <%= render 'categories/photos/form', photo: Photo.new %>
+  </div>
+  
   <div class="row row-cols-3">
     <% @category.photos.each do |photo| %>
-      <div class="col">
-        <%= render partial: "categories/photos/photo", locals: {photo: photo } %>
+      <div id="photo" class="col" >
+        <%= render partial: "categories/photos/photo", locals: {photo: photo } %>       
       </div>
     <% end %>
-  </div> 
-</div>
+  </div>
+</div> 
+
 
 
   <%#= render partial: "categories/photos/photo", collection: @category.photos %>

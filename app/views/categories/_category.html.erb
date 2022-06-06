@@ -9,10 +9,10 @@
     Time:
     <%= category.created_at.strftime("%H:%M")%>
   </p>
-
+  
   <span>
     <%= button_to "Destroy ", category, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class:"btn btn-danger" %>
-    <%= link_to "Edit ", edit_category_path(category), class:"btn btn-secondary" %>
+    <%= button_to "Edit ", edit_category_path(category), method: :post, class:"btn btn-secondary" %>
     <% if category.subscribes.present? %>
       <%= button_to "Unsubscribe", [:unsubscribe, category], method: :delete, data: {turbo: "false"}, class:"btn btn-danger" %>
     <% else %>

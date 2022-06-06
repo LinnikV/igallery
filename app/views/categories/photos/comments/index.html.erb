@@ -3,19 +3,19 @@
 
 <% @comments.each do |comment| %>
   <div class="card">
+      <p>
+      <strong>Comment:</strong><br>
+      <%= comment.body %>
+    </p>
+
     <p>
       <strong>Сreated by:</strong>
       <%= comment.user.email %>
     </p>
-
-    <p>
-      <strong>Comment:</strong>
-      <%= comment.body %>
-    </p>
     
     <p>
       <strong>Category:</strong>
-      <%= comment.photo.category.title %>
+      <%= link_to comment.photo.category.title, comment.photo.category %>
     </p>
 
     <p>

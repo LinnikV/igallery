@@ -64,7 +64,10 @@
       <div id="flash">
        <%= render "shared/flash" %>
        </div>
-      <%= render "categories/modal", category: Category.new %>
+       <div id="new_category">
+        <%= render "categories/modal", category: Category.new %>
+      </div>
+      <%= Time.now%>
       <%= yield %>
     </div>
   </body>

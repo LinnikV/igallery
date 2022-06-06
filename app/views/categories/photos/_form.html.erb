@@ -1,10 +1,10 @@
 <%= form_with(model: [@category, photo]) do |form| %>
- <%= render 'shared/errors', form: form %>
+<%= render 'shared/errors', form: form %>
 
   <div class="mb-3">
   <h5>Add image:</h5>
     <%= form.file_field :image, class:"form-control form-control-sm" %>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>
 

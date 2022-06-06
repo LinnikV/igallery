@@ -10,9 +10,11 @@
     <%=  simple_format(comment.body) %>
   </p>
 
-  <p>
-    <%= link_to "Edit", edit_category_photo_comment_path(@category, @photo, comment) %>
-    <%= button_to "Destroy", category_photo_comment_path(@category, @photo, comment), method: :delete %>
-  </p>
+  <span>
+    <%= button_to "Edit", edit_category_photo_comment_path(@category, @photo, comment), method: :post, class:"btn btn-secondary" %>
+    <%= button_to "Destroy", category_photo_comment_path(@category, @photo, comment), method: :delete , class:"btn btn-danger" %>
+  </span>
 <hr>
 </div>
+
+

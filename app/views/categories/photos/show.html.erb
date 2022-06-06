@@ -1,11 +1,10 @@
 <%= render @photo %>
 
-<div>
-  <%= link_to "Edit", edit_category_photo_path(@category, @photo) %> |
-  <%= button_to "Destroy", category_photo_path(@category, @photo), method: :delete %>
-</div>
-
+<div id="new_comment">
   <%= render 'categories/photos/comments/form', comment: Comment.new %>
+</div>
+<div id="comment">
   <%= render partial: "categories/photos/comments/comment", collection: @photo.comments %>
+</div>
 
 

@@ -7,12 +7,19 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-    
   end
 
   def show; end
 
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.turbo_stream do 
+        render turbo_stream: [
+        turbo_stream.update(@category, partial: "categories/form", locals:{category: @category})
+      ]
+      end
+    end
+  end
 
   def create
     @category = current_user.categories.new(category_params)
@@ -22,19 +29,17 @@ class CategoriesController < ApplicationController
         flash.now[:notice] = "Category was successfully created."
         format.turbo_stream do 
           render turbo_stream: [
-            #turbo_stream.prepend("new_category", partial: "categories/category",locals: { category: @category}),
-            turbo_stream.prepend("flash", partial: "shared/flash") ]
+            turbo_stream.prepend("flash", partial: "shared/flash"),
+           ]
         end
-        format.html { redirect_to category_url, notice: "Category was successfully created." }
+        #format.html { redirect_to category_url, notice: "Category was successfully created." }
       else
         render_turbo_stream_error
         format.turbo_stream do
           render turbo_stream: [
-            #turbo_stream.update(@category, partial: "categories/_new",locals: { category:  @category}) 
             turbo_stream.prepend("flash", partial: "shared/flash")
           ]
         end
-        #format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -42,8 +47,19 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
+        format.turbo_stream do 
+          render turbo_stream: [
+          turbo_stream.update(@category, partial: "categories/category", locals:{category: @category})
+        ]
+        end
         format.html { redirect_to category_url(@category), notice: 'Category was successfully updated.' }
       else
+        render_turbo_stream_error
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.prepend("flash", partial: "shared/flash")
+          ]
+        end
         format.html { render :edit, status: :unprocessable_entity }
       end
     end

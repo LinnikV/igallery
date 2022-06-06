@@ -1,12 +1,12 @@
 <%= form_with(model: [@category, @photo, comment]) do |form| %>
 <%= render 'shared/errors', form: form %>
 
-  <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_area :body %>
+  <div class="mb-3">
+    <%= form.label :body, class:"form-label" %>
+    <%= form.text_area :body, class:"form-control" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

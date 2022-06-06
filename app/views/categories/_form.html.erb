@@ -3,8 +3,8 @@
     <%= render 'shared/errors', form: form %>
 
     <div class="field">
-      <%= form.label :title %><br>
-      <%= form.text_field :title %>
+      <%= form.label :title, class:"form-label" %><br>
+      <%= form.text_field :title, class:"form-control" %>
     </div>
 
     <%= form.submit class: "btn btn-primary" %>
