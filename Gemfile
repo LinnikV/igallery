@@ -22,6 +22,7 @@ gem "mini_magick"
 gem 'acts_as_votable'
 gem 'ransack'
 gem 'friendly_id'
+gem 'pagy'
 
 group :development, :test do
   gem 'rspec-rails'

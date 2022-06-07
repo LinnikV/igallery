@@ -7,7 +7,7 @@ module Categories
 
       def index
         @q = Comment.ransack(params[:q])
-        @comments = @q.result(distinct: true).order(created_at: :desc)
+        @pagy, @comments = pagy(@q.result(distinct: true).order(created_at: :desc), utems: 20)
       end
 
       def edit

@@ -3,8 +3,10 @@ class CategoriesController < ApplicationController
 
   def index
     #@categories = Category.all
+  
     @q = Category.ransack(params[:q])
-    @categories = @q.result(distinct: true).order(title: :asc)
+    @pagy, @categories = pagy(@q.result(distinct: true).order(title: :asc), items: 12)
+    #@pagy, @records = pagy(Product.some_scope)
   end
 
   def new

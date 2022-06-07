@@ -12,7 +12,7 @@ module Categories
 
     def index
       @q = Photo.ransack(params[:q])
-      @photos = @q.result(distinct: true).order(cached_votes_total: :desc)
+      @pagy, @photos = pagy(@q.result(distinct: true).order(cached_votes_total: :desc), items: 20)
     end
 
     def show; end
