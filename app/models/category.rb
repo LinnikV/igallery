@@ -6,4 +6,7 @@ class Category < ApplicationRecord
   validates :title, presence: true
   validates :title, uniqueness: true
   validates :title, length: { in: 3..50 }
+
+  extend FriendlyId
+  friendly_id :title, use: %i[slugged finders]
 end

@@ -1,11 +1,14 @@
 <div>
     <% if signed_in? %>
         <h3>Feeds</h3>
+        <div class="row row-cols-3">
         <% current_user.subscribes.each do |subscribe| %>
-            <div class="row row-cols-3">
+            
+            <div class="col">
                 <%= render partial: "categories/photos/photo", collection: subscribe.category.photos %>
-        <% end %>
             </div> 
+        <% end %>
+          </div>   
     <% else %>
         <h2>Welcome to the IGallary!</h2>
         <% @photos.each do |photo| %>
@@ -14,6 +17,3 @@
     <% end %>
 </div>
 
-
-
- 
