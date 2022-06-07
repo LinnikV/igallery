@@ -23,6 +23,8 @@ gem 'acts_as_votable'
 gem 'ransack'
 gem 'friendly_id'
 gem 'pagy'
+gem 'activeadmin'
+
 
 group :development, :test do
   gem 'rspec-rails'

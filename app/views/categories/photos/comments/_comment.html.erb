@@ -1,4 +1,4 @@
-<div id="<%= dom_id comment %>">
+<div class="form-control" id="<%= dom_id comment %>">
 
  <p>
     <strong>User:</strong>
@@ -9,12 +9,6 @@
     <strong>Comment:</strong>
     <%=  simple_format(comment.body) %>
   </p>
-
-  <span>
-    <%= button_to "Edit", edit_category_photo_comment_path(@category, @photo, comment), method: :post, class:"btn btn-secondary" %>
-    <%= button_to "Destroy", category_photo_comment_path(@category, @photo, comment), method: :delete , class:"btn btn-danger" %>
-  </span>
-<hr>
 </div>
 
 

@@ -2,11 +2,8 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show subscribe unsubscribe edit update destroy ]
 
   def index
-    #@categories = Category.all
-  
     @q = Category.ransack(params[:q])
     @pagy, @categories = pagy(@q.result(distinct: true).order(title: :asc), items: 12)
-    #@pagy, @records = pagy(Product.some_scope)
   end
 
   def new
@@ -36,7 +33,6 @@ class CategoriesController < ApplicationController
             turbo_stream.prepend("flash", partial: "shared/flash"),
            ]
         end
-        #format.html { redirect_to category_url, notice: "Category was successfully created." }
       else
         render_turbo_stream_error
         format.turbo_stream do
@@ -56,7 +52,6 @@ class CategoriesController < ApplicationController
           turbo_stream.update(@category, partial: "categories/category", locals:{category: @category})
         ]
         end
-        format.html { redirect_to category_url(@category), notice: 'Category was successfully updated.' }
       else
         render_turbo_stream_error
         format.turbo_stream do
@@ -64,7 +59,6 @@ class CategoriesController < ApplicationController
             turbo_stream.prepend("flash", partial: "shared/flash")
           ]
         end
-        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end
@@ -73,7 +67,6 @@ class CategoriesController < ApplicationController
     @category.destroy
 
     respond_to do |format|
-     
       format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
     end
   end
@@ -85,7 +78,6 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @subscribe.save
-    
         format.html { redirect_to category_url, notice: "Subscribe was successfully created." }
       else
         format.html { redirect_to category_url, notice: 'You are already subscribed to the category!' }
@@ -100,7 +92,6 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to category_url, notice: 'Unsubscribe!' }
     end
-
   end
 
   private

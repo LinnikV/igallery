@@ -1,13 +1,15 @@
-<center>
-<%= image_tag (@photo.image.url) %>
-</center>
-<div id="new_comment">
-  <%= render 'categories/photos/comments/form', comment: Comment.new %>
-</div>
-<div id="comment">
-  <%= render partial: "categories/photos/comments/comment", collection: @photo.comments %>
-</div>
 
+  <div class="text-center d-block">
+    <%= image_tag (@photo.image.url) %>
+  </div>
 
+<div class=" ms-5 me-5">
+  <div id="new_comment">
+    <%= render 'categories/photos/comments/form', comment: Comment.new %>
+  </div>
+  <div id="comment">
+    <%= render partial: "categories/photos/comments/comment", collection: @photo.comments %>
+  </div>
+</div>
 
 

@@ -1,27 +1,27 @@
-<h3>Comments</h3>
-
-
 <% @comments.each do |comment| %>
-  <div class="card">
+  <div class="container form-control">
+    <div class=" ms-5">
       <p>
-      <strong>Comment:</strong><br>
-      <%= comment.body %>
-    </p>
+        <strong>Comment:</strong><br>
+        <%= comment.body %>
+      </p>
 
-    <p>
-      <strong>Сreated by:</strong>
-      <%= comment.user.email %>
-    </p>
-    
-    <p>
-      <strong>Category:</strong>
-      <%= link_to comment.photo.category.title, comment.photo.category %>
-    </p>
+      <p>
+        <strong>Сreated by:</strong>
+        <%= comment.user.email %>
+      </p>
 
-    <p>
-      <strong>Data:</strong>
-      <%= comment.created_at.strftime("%H:%M  %d.%b.%Y")%><br>
-    </p>
+      <p>
+        <strong>Category:</strong>
+        <%= link_to comment.photo.category.title, comment.photo.category %>
+      </p>
+
+      <p>
+        <strong>Data:</strong>
+        <%= comment.created_at.strftime("%H:%M  %d.%b.%Y")%><br>
+      </p>
+    </div>
   </div>
 <% end %>
+
 <%== pagy_bootstrap_nav(@pagy) %>

@@ -1,13 +1,15 @@
 <span>
   <%= search_form_for @q do |f| %>
-  <div class="input-group">
+  <div class="input-group ">
     <%= f.search_field :title_cont, class:"form-control rounded" %>
     <%= f.submit class:"btn btn-outline-primary" %>
     </div>
   <% end %>
-  <%= sort_link(@q, :title) %>
-  <%= sort_link(@q, :created_at) %>
-  <%= sort_link(@q, :photos_count) %>
+  <ul class="pagination">
+    <li class="page-item page-link"><%= sort_link(@q, :title) %></li>
+    <li class="page-item page-link"><%= sort_link(@q, :created_at) %></li>
+    <li class="page-item page-link"><%= sort_link(@q, :photos_count) %></li>
+  </ul>
 </span>
 
 <div id="category">
@@ -20,3 +22,6 @@
   </div> 
 </div>
 <%== pagy_bootstrap_nav(@pagy) %>
+
+
+

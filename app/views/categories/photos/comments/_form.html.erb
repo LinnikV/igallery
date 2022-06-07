@@ -1,12 +1,13 @@
 <%= form_with(model: [@category, @photo, comment]) do |form| %>
-<%= render 'shared/errors', form: form %>
-
-  <div class="form-outline">
-    <%= form.label :body, class:"form-label" %>
-    <%= form.text_area :body, class:"form-control" %>
-  </div>
-
-  <div>
-    <%= form.submit class: "btn btn-primary" %>
+  <%= render 'shared/errors', form: form %>
+  <div class="form-control">
+    <div class="form-outline">
+      <%= form.label :body, class:"form-label" %>
+      <%= form.text_area :body, class:"form-control" %>
+    </div>
+    
+    <div>
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>

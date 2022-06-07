@@ -1,12 +1,10 @@
-<div class="card " id="<%= dom_id photo %>">
+<div class="card" id="<%= dom_id photo %>">
  
   <div class="card-header">
     <%= link_to image_tag(photo.image.url(:large)), category_photo_path(@category, photo) %>
   </div>
 
   <div class="card-body">
-    <%= button_to "Edit", edit_category_photo_path(@category, photo),method: :post, class:"btn btn-secondary" %>
-    <%= button_to "Destroy ", category_photo_path(@category, photo), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class:"btn btn-danger" %>
     <%= button_to "Like", [:upvote, @category, photo], method: :patch, data: {turbo: "false"} %>
     <%= photo.cached_votes_total %>
   </div>

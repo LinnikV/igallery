@@ -1,11 +1,10 @@
-<div id="photos">
-  <div class="row row-cols-3">
-    <% @photos.each do |photo| %>
-      <div class="col">
-        <%=  image_tag (photo.image.url(:large)) %>
-      </div>
-    <% end %>
-  </div>
+<div id="photos" class="row row-cols-3 ">
+  <% @photos.each do |photo| %>
+    <div class="col shadow p-3 mb-5 ">
+      <center>
+        <%=  image_tag (photo.image.url(:large)), class:"rounded" %>
+      </center>
+    </div>
+  <% end %>
 </div>
-
 <%== pagy_bootstrap_nav(@pagy) %>

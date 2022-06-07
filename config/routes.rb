@@ -19,11 +19,11 @@ Rails.application.routes.draw do
         patch :subscribe
         delete :unsubscribe
       end
-    resources :photos, module: :categories do
+    resources :photos,only: %i[show create], module: :categories do
         member do  
           patch :upvote
         end
-      resources :comments, module: :photos
+      resources :comments, only: %i[create], module: :photos
 
     end
   end
