@@ -91,8 +91,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # (within the application controller) to return the currently logged in user.
-  config.authentication_method = false
-  config.current_user_method   = false
+  config.current_user_method = :current_admin_user
 
   # == Logging Out
   #
@@ -128,7 +127,7 @@ ActiveAdmin.setup do |config|
   # config.comments = false
   #
   # You can change the name under which comments are registered:
-  # config.comments_registration_name = 'AdminComment'
+   config.comments_registration_name = 'AdminComment'
   #
   # You can change the order for the comments and you can change the column
   # to be used for ordering:

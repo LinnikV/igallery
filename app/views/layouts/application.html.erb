@@ -23,12 +23,7 @@
                 
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-              <%#= link_to "New", new_category_path, class:"btn btn-primary ", data: { turbo_frame: dom_id(Category.new) }, class:"dropdown-item" %>
               <%= link_to "New Category", new_category_path, class:"dropdown-item", data: { bs_toggle: "modal", bs_target: "#lol" } %>
-
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
             </div>
             <li class="nav-item">
