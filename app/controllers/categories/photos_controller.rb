@@ -11,7 +11,7 @@ module Categories
 
     def index
       @q = Photo.ransack(params[:q])
-      @pagy, @photos = pagy(@q.result(distinct: true).order(cached_votes_total: :desc), items: 20)
+      @pagy, @photos = pagy(@q.result(distinct: true).order(cached_votes_total: :desc), items: 18)
     end
 
     def show
@@ -24,6 +24,13 @@ module Categories
 
       respond_to do |format|
         if @photo.save
+
+            current_user.subscribes.each do |subscribe|
+            if (subscribe.category_id) == (@category.id).to_s
+                UserMailer.photo_create(current_user, subscribe).deliver_later 
+               end
+            end
+
           format.turbo_stream do 
             render turbo_stream: [
               turbo_stream.update("new_photo", partial: "categories/photos/form", locals:{photo: Photo.new} )

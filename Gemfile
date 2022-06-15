@@ -26,12 +26,14 @@ gem 'pagy'
 gem 'activeadmin'
 
 
+
 group :development, :test do
   gem 'rspec-rails'
 end
 
 group :development do
   gem "web-console"
+  gem 'letter_opener'
 
 end
 

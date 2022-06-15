@@ -72,25 +72,26 @@ class CategoriesController < ApplicationController
   end
 
   def subscribe
-    @subscribe = @category.subscribes.new
+    @subscribe = current_user.subscribes.new
     @subscribe.category_id = @category.id
     @subscribe.user_id = current_user.id
 
-    respond_to do |format|
-      if @subscribe.save
-        format.html { redirect_to category_url, notice: "Subscribe was successfully created." }
-      else
-        format.html { redirect_to category_url, notice: 'You are already subscribed to the category!' }
+      respond_to do |format|
+        if @subscribe.save
+          UserMailer.category_subscribe(current_user, @subscribe).deliver_later
+          format.html { redirect_to categories_url, notice: "Subscribe was successfully created." }
+        else
+          format.html { redirect_to categories_url, notice: 'You are already subscribed to the category!' }
+        end
       end
-    end
   end
 
   def unsubscribe
-    @subscribe = Subscribe.find_by(params[:subscribe_id])
+    @subscribe = current_user.subscribes.find_by(params[:subscribe_id])
     @subscribe.destroy
 
     respond_to do |format|
-      format.html { redirect_to category_url, notice: 'Unsubscribe!' }
+      format.html { redirect_to categories_url, notice: 'Unsubscribe!' }
     end
   end
 
