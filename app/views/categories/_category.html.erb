@@ -18,7 +18,7 @@
   <div class="card-footer">
     <%= button_to "Destroy ", category, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class:"btn btn-danger" %>
     <%= button_to "Edit ", edit_category_path(category), method: :post, class:"btn btn-secondary" %>
-    <% if category.subscribes.where(params[:category_id] == category.id).blank? %>
+    <% if category.subscribes.where(params[:user_id] == current_user.id).blank? %>
       <%= button_to "Subscribe", [:subscribe, category], method: :patch, data: {turbo: "false"}, class:"btn btn-success" %>
     <% else %>
       <%= button_to "Unsubscribe", [:unsubscribe, category], method: :delete, data: {turbo: "false"}, class:"btn btn-danger" %>

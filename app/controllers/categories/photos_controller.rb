@@ -24,12 +24,13 @@ module Categories
 
       respond_to do |format|
         if @photo.save
-
-            current_user.subscribes.each do |subscribe|
-            if (subscribe.category_id) == (@category.id).to_s
-                UserMailer.photo_create(current_user, subscribe).deliver_later 
+            User.all.each do |user|
+            @category.subscribes.each do |subscribe|
+            if ((subscribe.category_id) == (@category.id).to_s && (subscribe.user_id) == (user.id).to_s)
+                UserMailer.photo_create(user, subscribe, current_user).deliver_later 
                end
             end
+          end
 
           format.turbo_stream do 
             render turbo_stream: [
