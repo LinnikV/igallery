@@ -1,6 +1,10 @@
+require 'resque/server'
+
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  mount Resque::Server.new, at: "/resque"
 
   root 'static_page#home'
   get 'images', action: :index, controller: 'categories/photos'
@@ -30,3 +34,5 @@ Rails.application.routes.draw do
     end
   end
 end
+
+

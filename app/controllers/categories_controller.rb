@@ -78,7 +78,7 @@ class CategoriesController < ApplicationController
 
       respond_to do |format|
         if @subscribe.save
-          UserMailer.category_subscribe(current_user, @subscribe).deliver_later
+          CategorySubscribeJob.perform_later(current_user, @subscribe)
           format.html { redirect_to categories_url, notice: "Subscribe was successfully created." }
         else
           format.html { redirect_to categories_url, notice: 'You are already subscribed to the category!' }

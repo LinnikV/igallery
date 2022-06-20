@@ -27,7 +27,7 @@ module Categories
             User.all.each do |user|
             @category.subscribes.each do |subscribe|
             if ((subscribe.category_id) == (@category.id).to_s && (subscribe.user_id) == (user.id).to_s)
-                UserMailer.photo_create(user, subscribe, current_user).deliver_later 
+              PhotoCreateJob.perform_later(user, subscribe, current_user)
                end
             end
           end

@@ -24,6 +24,8 @@ gem 'ransack'
 gem 'friendly_id'
 gem 'pagy'
 gem 'activeadmin'
+gem 'resque'
+gem 'redis', '< 4.6'
 
 
 

@@ -10,6 +10,8 @@ module Igallery
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    config.active_job.queue_adapter = :resque
+    config.active_job.queue_name_prefix = "igallery_#{Rails.env}"
 
     # Configuration for the application, engines, and railties goes here.
     #
