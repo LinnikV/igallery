@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :photos, through: :categories
   has_many :comments, dependent: :destroy
   has_many :subscribes, dependent: :destroy
+  has_many :events, dependent: :destroy
 end
