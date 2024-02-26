@@ -32,7 +32,7 @@
         <div class="card mt-5">
           <h3 class="card-header">Comments</h3>
           <div class="card-body">
-            <%= turbo_frame_tag "comment_#{photo.id}" do %>
+            <%= turbo_frame_tag "photo_comment_#{photo.id}" do %>
               <%= render partial: "categories/photos/comments/comment", collection: photo.comments %>
             <% end %>
             <%= turbo_frame_tag "new_comment" do %>

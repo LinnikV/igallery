@@ -15,7 +15,7 @@ module Categories
           if @comment.save
             format.turbo_stream do
               render turbo_stream: [
-                turbo_stream.prepend("comment_#{@photo.id}", partial: 'categories/photos/comments/comment',
+                turbo_stream.prepend("photo_comment_#{@photo.id}", partial: 'categories/photos/comments/comment',
                                                              locals: { comment: @comment })
               ]
             end
