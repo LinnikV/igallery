@@ -1,20 +1,49 @@
 <div class="card" id="<%= dom_id photo %>">
- 
   <div class="card-header">
-    <%= link_to image_tag(photo.image.url(:large)), category_photo_path(@category, photo) %>
+    <%= link_to image_tag(photo.image.url(:large)), "#", data: {bs_toggle:"modal" , bs_target:"#modal_#{photo[:id]}" } %>
   </div>
-
   <div class="card-body">
-    <%= button_to "Like", [:upvote, @category, photo], method: :patch, data: {turbo: "false"} %>
-    <%= photo.cached_votes_total %>
+    <div class="row text-dark">
+      <div class="col-sm-6 text-start">
+        <%= photo.user.email %>
+      </div>
+      <div class="col-sm-6 text-end">
+        <%= button_to [:upvote, @category, photo],class:"clear_button"  do %>
+          <%= (photo.voted_up_by? current_user)? (image_tag "like.png", class:"like") : (image_tag "heart.png", class:"like")%>
+        <% end %>
+        <%= photo.cached_votes_total %>
+      </div>
+    </div>
   </div>
-  
-
-  <div class="card-footer text-muted">
-    <strong>Сreated by:</strong>
-    <%= photo.user.email %>
-  </div>
-
 </div>
 
-
+<!-- Modal -->
+<div class="modal fade" id="modal_<%= photo[:id] %>" tabindex="-1" aria-labelledby="modal_<%= photo[:id] %>" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><%= @category.title %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center" >
+          <%= image_tag (photo.image.url), style:"width: 100%;" %>
+        </div>
+        <div class="card mt-5">
+          <h3 class="card-header">Comments</h3>
+          <div class="card-body">
+            <%= turbo_frame_tag "comment_#{photo.id}" do %>
+              <%= render partial: "categories/photos/comments/comment", collection: photo.comments %>
+            <% end %>
+            <%= turbo_frame_tag "new_comment" do %>
+              <%= render partial: "categories/photos/comments/form", locals:{photo: photo} %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

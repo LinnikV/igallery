@@ -1,13 +1,17 @@
-<%= form_with(model: [@category, @photo, comment]) do |form| %>
-  <%= render 'shared/errors', form: form %>
+<div class="row">
+  <%= turbo_frame_tag "comment_errors_#{photo.id}" do %>
+    <%= render "shared/flash" %>
+  <% end %>
+</div>
+<%= form_with model: [@category, photo, Comment.new], method: :post, class: "d-flex", data: {turbo_frame: "comment_#{photo.id}", turbo_action: "advance", controller: "clearform", action: "turbo:submit-end->clearform#clearInput"} do |form| %>
   <div class="form-control">
     <div class="form-outline">
-      <%= form.label :body, class:"form-label" %>
+      <% form.label :body, class:"form-label" %>
       <%= form.text_area :body, class:"form-control" %>
     </div>
     
     <div>
-      <%= form.submit class: "btn btn-primary" %>
+      <%= form.submit "Send", class: "btn btn-outline-success" %>
     </div>
   </div>
 <% end %>

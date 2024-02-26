@@ -1,21 +1,18 @@
 <%= turbo_frame_tag category do %>
   <div data-controller="turbomodal" data-action="turbo:submit-end->turbomodal#submitEnd">
     <%= form_with(model: category) do |form| %>
-      <div class="modal fade" id="lol" tabindex="-1" data-bs-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="newCategory" data-bs-backdrop="false" aria-labelledby="newCategory" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="lolLabel">New Category</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-
               <div class="modal-body">
                 <div class="field">
-                  <%= form.label :title %><br>
-                  <%= form.text_field :title %>
+                  <%= form.text_field :title, placeholder: "Name:" %>
                 </div>
               </div>
-
               <div class="modal-footer">
                 <%= form.submit class: "btn btn-primary" %>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

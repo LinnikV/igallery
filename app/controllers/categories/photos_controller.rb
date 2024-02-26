@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 module Categories
   class PhotosController < ApplicationController
-    before_action :set_category, only: %i[ upvote create show ]
-    
+    before_action :set_category, only: %i[upvote create]
 
     def upvote
       @photo = @category.photos.find(params[:id])
       @photo.upvote! current_user
-      redirect_to request.referrer
+      redirect_to request.referer
     end
 
     def index
@@ -14,39 +15,32 @@ module Categories
       @pagy, @photos = pagy(@q.result(distinct: true).order(cached_votes_total: :desc), items: 18)
     end
 
-    def show
-      @photo = Photo.find(params[:id])
-    end
-
-
     def create
       @photo = @category.photos.new(photo_params)
-
       respond_to do |format|
         if @photo.save
-            User.all.each do |user|
+          User.find_each do |user|
             @category.subscribes.each do |subscribe|
-            if ((subscribe.category_id) == (@category.id).to_s && (subscribe.user_id) == (user.id).to_s)
-              PhotoCreateJob.perform_later(user, subscribe, current_user)
-               end
+              if subscribe.category_id == @category.id.to_s && subscribe.user_id == user.id.to_s
+                PhotoCreateJob.perform_later(user, subscribe, current_user)
+              end
             end
           end
 
-          format.turbo_stream do 
+          format.turbo_stream do
             render turbo_stream: [
-              turbo_stream.update("new_photo", partial: "categories/photos/form", locals:{photo: Photo.new} )
+              turbo_stream.update('new_photo', partial: 'categories/photos/form', locals: { photo: Photo.new })
             ]
           end
         else
-          format.turbo_stream do 
+          format.turbo_stream do
             render turbo_stream: [
-              turbo_stream.update("new_photo", partial: "categories/photos/form", locals:{photo: @photo} )
+              turbo_stream.update('new_photo', partial: 'categories/photos/form', locals: { photo: @photo })
             ]
           end
         end
       end
     end
-
 
     private
 
@@ -59,5 +53,3 @@ module Categories
     end
   end
 end
-
-

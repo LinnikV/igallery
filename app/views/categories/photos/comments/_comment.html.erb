@@ -1,14 +1,11 @@
-<div class="form-control" id="<%= dom_id comment %>">
-
- <p>
-    <strong>User:</strong>
-    <%= comment.user.email %>
-  </p>
-  
-  <p>
-    <strong>Comment:</strong>
+<div class="card mb-2" id="<%= dom_id comment %>">
+  <div class="row">
+    <div class="card-header">
+      <%= image_tag (comment.user.avatar.url(:thumb)), style:"height: 30px; weight: 30px;"%>
+      <strong><%= comment.user.email %></strong>
+    </div>
+  </div>
+  <div class="card-body">
     <%=  simple_format(comment.body) %>
-  </p>
+  </div>
 </div>
-
-

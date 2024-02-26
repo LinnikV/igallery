@@ -1,0 +1,14 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  Exclude:
+  - 'test/**/*'
+  - 'spec/**/*'
+
+  NewCops: enable
+
+
+Style/Documentation:
+  Enabled: false

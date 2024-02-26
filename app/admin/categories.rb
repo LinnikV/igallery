@@ -1,5 +1,6 @@
-ActiveAdmin.register Category do
+# frozen_string_literal: true
 
+ActiveAdmin.register Category do
   index do
     selectable_column
     column :id
@@ -17,20 +18,19 @@ ActiveAdmin.register Category do
   filter :created_at
   filter :updated_at
   filter :slug
- 
 
   form do |f|
     f.inputs do
       f.input :user
       f.input :title
-      
+
       f.input :slug
     end
     f.actions
   end
 
   permit_params do
-    params = [:user_id, :title]
+    params = %i[user_id title]
     params.push :user_id, :title
     params
   end

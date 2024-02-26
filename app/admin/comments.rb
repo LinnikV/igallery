@@ -1,5 +1,6 @@
-ActiveAdmin.register Comment do
+# frozen_string_literal: true
 
+ActiveAdmin.register Comment do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -14,7 +15,7 @@ ActiveAdmin.register Comment do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
   index do
     selectable_column
     column :id
@@ -26,9 +27,8 @@ ActiveAdmin.register Comment do
     actions
   end
 
-
   permit_params do
-    params = [:body, :user_id, :photo_id]
+    params = %i[body user_id photo_id]
     params.push :body, :user_id
     params
   end
@@ -36,13 +36,11 @@ ActiveAdmin.register Comment do
   filter :body
   filter :user
   filter :photo_id
- 
 
   form do |f|
     f.inputs do
       f.input :body
       f.input :user
-    
     end
     f.actions
   end

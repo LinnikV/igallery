@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 class Subscribe < ApplicationRecord
-    belongs_to :user
-    belongs_to :category
-    validates :category, uniqueness: true
+  belongs_to :user
+  belongs_to :category
 end

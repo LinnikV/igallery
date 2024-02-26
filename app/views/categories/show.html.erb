@@ -1,16 +1,17 @@
-<h3>
-  <%= @category.title.capitalize %>
-</h3>
-
-<div>
-  <div id="new_photo">
-    <%= render 'categories/photos/form', photo: Photo.new %>
+<div class="card text-center border-secondary mt-2">
+  <h4 class="card-header">
+    <%= @category.title.capitalize %>
+  </h4>
+  <div class="card-body">
+    <div id="new_photo">
+      <%= render 'categories/photos/form', photo: @category.photos.new %>
+    </div>
   </div>
-  <div class="row row-cols-3">
-    <% @category.photos.each do |photo| %>
-      <div id="photo" class="col" >
-        <%= render partial: "categories/photos/photo", locals: {photo: photo } %>       
-      </div>
-    <% end %>
-  </div>
-</div> 
+</div>
+<div class="row row-cols-3 mt-3">
+  <% @category.photos.order(cached_votes_total: :desc).each do |photo| %>
+    <div id="photo" class="col" >
+      <%= render partial: "categories/photos/photo", locals: {photo: photo } %>       
+    </div>
+  <% end %>
+</div>

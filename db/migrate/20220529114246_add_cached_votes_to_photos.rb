@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddCachedVotesToPhotos < ActiveRecord::Migration[7.0]
   def change
     change_table :photos do |t|

@@ -11,49 +11,52 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-      <div class="container-fluid">
-      <%= link_to "IGallery", root_path, class:"navbar-brand" %>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-            <div class="btn-group">
-              <%= link_to "Categories", categories_path, class:"nav-link" %>
-              <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
-                
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-              <%= link_to "New Category", new_category_path, class:"dropdown-item", data: { bs_toggle: "modal", bs_target: "#lol" } %>
-              </ul>
-            </div>
-            <li class="nav-item">
-            <li> <%= link_to "Imeges", images_path, class:"nav-link active" %></li>
-            </li>
-            <li class="nav-item">
-            <li> <%= link_to "Comments", comments_path(@comments), class:"nav-link active" %></li>
-            </li>
-          </ul>
-          <form class="d-flex">
-            <% if signed_in? %>
-              <li>
-                <%= link_to current_user.email, edit_user_registration_path, class:"btn btn-link " %>
-              </li>
-              <li>
-                <%= link_to " Log out", destroy_user_session_path, data: { "turbo_method": :delete, turbo_confirm: "Are you sure?" } , class: "btn btn-outline-danger" %>
-              </li>
-              <% else %>
-              <li>
-                <%= link_to " Log in", new_user_session_path, class: "btn btn-outline-success" %>
-              </li>
-              <li>
-                <%= link_to " Register", new_user_registration_path, class:"btn btn-outline-success" %>
-              </li>
-              <% end %>
-          </form>
-        </div>
-      </div>
-    </nav>
     <div class="container-fluid">
+      <nav class="navbar navbar-light bg-light navbar-expand-lg border border-dark">
+        <div class="container-fluid">
+        <%= link_to "IGallery", root_path, class:"navbar-brand" %>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              <div class="btn-group">
+                <%= link_to "Categories", categories_path, class:"nav-link" %>
+                <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                  
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+                <%= link_to "New Category", new_category_path, class:"dropdown-item", data: { bs_toggle: "modal", bs_target: "#newCategory" } %>
+                </ul>
+              </div>
+              <li class="nav-item">
+              <li> <%= link_to "Imeges", images_path, class:"nav-link active" %></li>
+              </li>
+              <li class="nav-item">
+              <li> <%= link_to "Comments", comments_path(@comments), class:"nav-link active" %></li>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <% if signed_in? %>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item btn btn-outline-info">
+                    <%= image_tag (current_user.avatar.url(:thumb)), style:"height: 30px; weight: 30px;"%>
+                    <%= link_to current_user.email, edit_user_registration_path, class:"ms-2" %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to " Log out", destroy_user_session_path, data: { "turbo_method": :delete, turbo_confirm: "Are you sure?" } , class: "btn btn-outline-danger" %>
+                  </li>
+                  <% else %>
+                  <li class="nav-item">
+                    <%= link_to " Log in", new_user_session_path, class: "btn btn-outline-success" %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to " Register", new_user_registration_path, class:"btn btn-outline-success" %>
+                  </li>
+                </ul>
+              <% end %>
+            </form>
+          </div>
+        </div>
+      </nav>
       <div id="flash">
         <%= render "shared/flash" %>
       </div>
@@ -64,3 +67,5 @@
     </div>
   </body>
 </html>
+
+

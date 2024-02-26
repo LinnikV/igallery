@@ -1,5 +1,6 @@
-ActiveAdmin.register Photo do
+# frozen_string_literal: true
 
+ActiveAdmin.register Photo do
   index do
     selectable_column
     column :id
@@ -15,9 +16,8 @@ ActiveAdmin.register Photo do
     actions
   end
 
-
   permit_params do
-    params = [:image, :category_id, :user_id, :cached_votes_total]
+    params = %i[image category_id user_id cached_votes_total]
     params.push :image, :category_id, :user_id, :cached_votes_total
     params
   end
@@ -25,7 +25,6 @@ ActiveAdmin.register Photo do
   filter :category
   filter :user
   filter :created_at
- 
 
   form do |f|
     f.inputs do

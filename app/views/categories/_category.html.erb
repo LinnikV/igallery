@@ -1,28 +1,40 @@
 <div class="card border border-secondary shadow-0 mb-3" id="<%= dom_id category %>">
-
-  <% if category.photos.first.present? %>
-    <%= image_tag (category.photos.first.image.url) %>
-  <%end %>
-  <div class="card-headercenter text-center">
-    <%= link_to "#{category.title.capitalize }", category %>
-  </div>
-   <div class="card-body text-dark">
-    Сreated by:
-    <%= category.user.email %><br>
-    Date:
-    <%= category.created_at.strftime("%d.%b.%Y")%><br>
-    Time:
-    <%= category.created_at.strftime("%H:%M")%><br>
- </div>
-  
-  <div class="card-footer">
-    <%= button_to "Destroy ", category, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class:"btn btn-danger" %>
-    <%= button_to "Edit ", edit_category_path(category), method: :post, class:"btn btn-secondary" %>
-    <% if category.subscribes.where(params[:user_id] == current_user.id).blank? %>
-      <%= button_to "Subscribe", [:subscribe, category], method: :patch, data: {turbo: "false"}, class:"btn btn-success" %>
-    <% else %>
-      <%= button_to "Unsubscribe", [:unsubscribe, category], method: :delete, data: {turbo: "false"}, class:"btn btn-danger" %>
+  <%= link_to  category do %>
+    <% if category.photos.first.present? %>
+      <%= image_tag (category.photos.first.image.url), class:"card-img-top" %>
     <% end %>
+    <div class="card-header text-center text-dark">
+      <%= category.title.capitalize %>
+    </div>
+  <% end %>
+  
+  <div class="card-body">
+    <div class="row text-dark">
+      <div class="col-sm-6 text-center">
+        <% if category.user.id == current_user.id %>
+          <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" >
+            Settings
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><%= button_to "Edit ", edit_category_path(category), method: :post, class:"dropdown-item" %></li>
+            <li><%= button_to "Destroy ", category, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class:"dropdown-item" %></li>
+          </ul>
+        <% else %>
+          <div class="form-control-plaintext">
+            <%= category.user.email %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-6 text-center">
+        <div class="btn-group">
+          <% unless category.subscribes.find_by(user_id: current_user.id).present? %>
+            <%= button_to "Subscribe", [:subscribe, category], method: :patch, data: {turbo: "false"}, class:"btn btn-outline-success" %>
+          <% else %>
+            <%= button_to "Unsubscribe", [:unsubscribe, category], method: :delete, data: {turbo: "false"}, class:"btn btn-outline-danger" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
 </div>
