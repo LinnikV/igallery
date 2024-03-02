@@ -1,7 +1,7 @@
 <div class="card mb-2" id="<%= dom_id comment %>">
   <div class="row">
     <div class="card-header">
-      <%= image_tag (comment.user.avatar.url(:thumb)), style:"height: 30px; weight: 30px;"%>
+      <%= (image_tag (comment.user.avatar.url(:thumb)), style:"height: 30px; weight: 30px;") if comment.user.avatar.present? %>
       <strong><%= comment.user.email %></strong>
     </div>
   </div>

@@ -38,7 +38,7 @@
               <% if signed_in? %>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item btn btn-outline-info">
-                    <%= image_tag (current_user.avatar.url(:thumb)), style:"height: 30px; weight: 30px;"%>
+                    <%= (image_tag (current_user.avatar.url(:thumb)), style:"height: 30px; weight: 30px;") if current_user.avatar.present? %>
                     <%= link_to current_user.email, edit_user_registration_path, class:"ms-2" %>
                   </li>
                   <li class="nav-item">

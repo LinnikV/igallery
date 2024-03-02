@@ -39,6 +39,7 @@ group :development do
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'web-console'
+  gem 'faker'
 end
 
 group :test do
